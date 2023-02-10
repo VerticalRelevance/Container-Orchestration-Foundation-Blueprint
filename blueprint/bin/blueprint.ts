@@ -10,7 +10,7 @@ import * as infrastructure from '../lib/infrastrucuture';
 
 const app = new cdk.App();
 const account = '899456967600';
-const region = 'us-east-2';
+const region = 'us-east-1';
 
 
 const platformTeam = new team.TeamPlatform(account)
@@ -29,8 +29,8 @@ const domainName = "verticalrelevancelabs.com";
 
 const addOns: Array<blueprints.ClusterAddOn> = [
     new blueprints.addons.ArgoCDAddOn(),
+    new blueprints.addons.SSMAgentAddOn(),
     new blueprints.addons.MetricsServerAddOn,
-    //new blueprints.addons.ClusterAutoScalerAddOn,
     new blueprints.addons.AwsLoadBalancerControllerAddOn(),
     new blueprints.addons.ExternalDnsAddOn({
         hostedZoneResources: ["HostedZone"]

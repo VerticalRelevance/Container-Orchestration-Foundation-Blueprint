@@ -10,10 +10,10 @@ all: bootstrap build
 	
 build:
 	make deploy
-	aws eks update-kubeconfig --name blueprint --region us-east-2 
-	./scripts/karpenter.sh
-	cd $(APP_PATH)/spring-frontend && git init && git remote add origin codecommit::us-east-2://spring-frontend && git push -u origin/main main
-	cd $(APP_PATH)/spring-backend && git init && git remote add origin codecommit::us-east-2://spring-backend && git push -u origin/main main
+	aws eks update-kubeconfig --name blueprint --region us-east-1
+	./scripts/karpenter_provisioner.sh
+	cd $(APP_PATH)/spring-frontend && git init && git remote add origin codecommit::us-east-1://spring-frontend && git push -u origin/main main
+	cd $(APP_PATH)/spring-backend && git init && git remote add origin codecommit::us-east-1://spring-backend && git push -u origin/main main
 
 argo-proxy:
 	echo $(ARGO_PWD)
@@ -23,11 +23,11 @@ deploy:
 	cd $(CDK_PATH) && cdk deploy --all 
 
 destroy:
-	eksctl delete iamserviceaccount --config-file=./tmp/service_account.yaml --approve 
+	eksctl delete iamserviceaccount --config-file=./scripts/service_account.yaml --approve
 	cd $(CDK_PATH) && cdk destroy --all 
 
 dashboard:
-	./scripts/k8_dashbard.sh
+	./scripts/k8_dashboard.sh
 apps:
 	./scripts/springapp.sh
 

@@ -7,7 +7,7 @@ kind: ClusterConfig
 
 metadata:
   name: blueprint
-  region: us-east-2
+  region: us-east-1
 
 iam:
   withOIDC: true
