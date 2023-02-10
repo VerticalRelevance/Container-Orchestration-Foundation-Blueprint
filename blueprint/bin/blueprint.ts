@@ -29,6 +29,7 @@ const domainName = "verticalrelevancelabs.com";
 
 const addOns: Array<blueprints.ClusterAddOn> = [
     new blueprints.addons.ArgoCDAddOn(),
+    new blueprints.addons.SSMAgentAddOn(),
     new blueprints.addons.MetricsServerAddOn,
     //new blueprints.addons.ClusterAutoScalerAddOn,
     new blueprints.addons.AwsLoadBalancerControllerAddOn(),
