@@ -10,7 +10,7 @@ import * as infrastructure from '../lib/infrastrucuture';
 
 const app = new cdk.App();
 const account = '899456967600';
-const region = 'us-east-2';
+const region = 'us-east-1';
 
 
 const platformTeam = new team.TeamPlatform(account)

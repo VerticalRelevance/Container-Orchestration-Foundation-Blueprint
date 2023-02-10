@@ -11,10 +11,10 @@ all: bootstrap build
 	
 build:
 	make deploy
-	aws eks update-kubeconfig --name blueprint --region us-east-2 
+	aws eks update-kubeconfig --name blueprint --region us-east-1
 	./scripts/karpenter_provisioner.sh
-	cd $(APP_PATH)/spring-frontend && git init && git add . && git commit -m 'inital commit' && git remote add origin codecommit::us-east-2://spring-frontend && git push --set-upstream origin main
-	cd $(APP_PATH)/spring-backend && git init && git add . && git commit -am 'inital commit' && git remote add origin codecommit::us-east-2://spring-backend && git push --set-upstream origin main
+	cd $(APP_PATH)/spring-frontend && git init && git add . && git commit -m 'inital commit' && git remote add origin codecommit::us-east-1://spring-frontend && git push --set-upstream origin main
+	cd $(APP_PATH)/spring-backend && git init && git add . && git commit -am 'inital commit' && git remote add origin codecommit::us-east-1://spring-backend && git push --set-upstream origin main
 
 argo-proxy:
 	echo "argo admin password: "$(ARGO_PASSWD)
@@ -38,7 +38,7 @@ bootstrap:
 		LIB=$$LIB make check-lib ; \
     done
 	cd $(CDK_PATH) && npm install
-	cdk bootstrap aws://$(ACCOUNT_ID)/us-east-2
+	cdk bootstrap aws://$(ACCOUNT_ID)/us-east-1
 
 check-lib:
 ifeq ($(shell brew ls --versions $(LIB)),)
