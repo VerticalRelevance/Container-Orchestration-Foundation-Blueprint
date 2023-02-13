@@ -5,7 +5,7 @@
 replicaCount: 3
 
 image:
-  repository: 899456967600.dkr.ecr.us-east-2.amazonaws.com/spring-backend:4218b7bamd64
+  repository: 899456967600.dkr.ecr.us-east-2.amazonaws.com/spring-backend:4e9b633amd64
   pullPolicy: IfNotPresent
 env:
   - name: SPRING_DATASOURCE_URL 
@@ -36,20 +36,32 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+resources: 
   # limits:
   #  cpu: 100m
   #  memory: 128Mi
-  # requests:
-  #  cpu: 100m
-  #  memory: 128Mi
+  requests:
+   cpu: 1000m
+   memory: 512Mi
 
-nodeSelector: {}
+nodeSelector:
+  intent: apps
 
 tolerations: []
 
 affinity: {}
+ 
+## Spring Backend Autoscaling parameters
+## ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
+## @param autoscaling.enabled Enable Horizontal POD autoscaling for Apache
+## @param autoscaling.minReplicas Minimum number of Apache replicas
+## @param autoscaling.maxReplicas Maximum number of Apache replicas
+## @param autoscaling.targetCPU Target CPU utilization percentage
+## @param autoscaling.targetMemory Target Memory utilization percentage
+##
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 11
+  targetCPU: 50
+  targetMemory: 50

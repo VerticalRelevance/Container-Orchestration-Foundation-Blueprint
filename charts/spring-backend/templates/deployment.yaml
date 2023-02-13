@@ -8,7 +8,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  #replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -31,14 +31,14 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          #livenessProbe:
-          #  httpGet:
-          #    path: /api
-          #    port: http
-          #readinessProbe:
-          #  httpGet:
-          #    path: /api
-          #    port: http
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: http
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
