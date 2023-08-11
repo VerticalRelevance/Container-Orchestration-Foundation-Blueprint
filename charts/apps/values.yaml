@@ -2,8 +2,8 @@ spec:
   destination:
     server: https://kubernetes.default.svc
   source:
-    repoURL: ''
-    targetRevision: ''
+    repoURL: git@github.com:VerticalRelevance/Container-Orchestration-Foundation-Blueprint.git
+    targetRevision: deploy-test
     path: ./charts
-backendRepoUrl: ''
-frontendRepoUrl: ''
+backendRepoUrl: 899456967600.dkr.ecr.us-east-2.amazonaws.com/spring-backend
+frontendRepoUrl: 899456967600.dkr.ecr.us-east-2.amazonaws.com/spring-frontend
